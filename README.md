@@ -2,8 +2,6 @@
 
 ## Homebrew 설치
 
-mac에서 개발 환경을 세팅할 때, 가장 먼저 설치해야 하는 패키지 관리 프로그램
-
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
