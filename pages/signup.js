@@ -14,16 +14,14 @@ export default function Signup() {
       .required('이름은 필수입니다.'),
     password: yup.string()
       .min(7, '비밀번호는 최소 7자 이상이어야 합니다.')
+      .max(20, '비밀번호는 최대 20자까지만 가능합니다.')
       .required('비밀번호는 필수입니다.'),
     confirmPassword: yup.string()
       .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.')
       .required('비밀번호 확인은 필수입니다.'),
     });
-
-  const formOptions = { resolver: yupResolver(validationSchema) };
     
-  const { register, handleSubmit, reset, formState } = useForm(formOptions);
-  const { errors } = formState;
+  const { register, handleSubmit, reset, formState: {errors} } = useForm({ resolver: yupResolver(validationSchema) });
 
   function onSubmit(data) {
     alert('SUCCESS' + JSON.stringify(data, null, 4));
@@ -53,8 +51,8 @@ export default function Signup() {
                     <span className="text-red-600 text-sm">{errors.confirmPassword?.message}</span>
                 </div>
                 <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">가입하기</button>
+                <button type="button" onClick={() => reset({ email: "", name: "", password: "", confirmPassword: "" }) } className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">리셋</button>
             </form>
-
             <p className="mt-5 text-center text-gray-600">이미 계정이 있으신가요?<Link href="/login"><a className="text-blue-600"> 로그인</a></Link></p>
             </div>
     </div>  
